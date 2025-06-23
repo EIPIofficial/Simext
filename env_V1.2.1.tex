@@ -1,0 +1,128 @@
+%%%%%%%%%%%%% Lua Code %%%%%%%%%%%%%
+
+\startluacode
+  fonts.handlers.otf.addfeature {
+    name = "bbnum",
+    type = "substitution",
+    data = {
+      [0x30] = 0x1D7D8,
+      [0x31] = 0x1D7D9,
+      [0x32] = 0x1D7DA,
+      [0x33] = 0x1D7DB,
+      [0x34] = 0x1D7DC,
+      [0x35] = 0x1D7DD,
+      [0x36] = 0x1D7DE,
+      [0x37] = 0x1D7DF,
+      [0x38] = 0x1D7E0,
+      [0x39] = 0x1D7E1,
+    }
+  }
+\stopluacode
+
+%%%%%%%%%%%%% Structure %%%%%%%%%%%%%
+
+\setuphead[title][header=high,align=middle,textstyle=\italic\bfd]
+
+\setupcombinedlist[content][alternative=c,list={chapter,section}]
+
+\setuphead[chapter][page=no,align=center,textstyle=ss,numberstyle=\tfd\addff{bbnum}]
+
+\setuphead[section][page=no,align=flushleft,style=bfb,before=\blank[2*big]\startframed[background=color,backgroundcolor=darkgray,foreground=color,foregroundcolor=white,frame=off],after=\stopframed\blank]
+
+\setuphead[subsection][page=no,number=no,align=flushleft,style=\bfa,before=\blank[2*big]\startframed[background=color,backgroundcolor=gray,frame=off],after=\stopframed\blank]
+
+\defineenumeration[structure][title=yes,prefix=chapter]
+\defineenumeration[definition][structure][text=Definition]
+\defineenumeration[proposition][structure][text=Proposition]
+\defineenumeration[theorem][structure][text=Theorem]
+\defineenumeration[lemma][structure][text=Lemma]
+\defineenumeration[exercise][structure][text=Exercise]
+\defineenumeration[problem][structure][text=Problem]
+\defineenumeration[corollary][structure][text=Corollary]
+\defineenumeration[example][structure][text=Example]
+
+\defineenumeration[observation][number=yes,title=yes,text={Observation}]
+\defineenumeration[proof][number=no,text=Proof,closesymbol=\mathqed,headstyle=italic]
+\defineenumeration[sproof][number=no,text={Sketch of Proof},closesymbol=\mathqed,headstyle=italic]
+\defineenumeration[solution][title=yes,number=no,text=Solution,headstyle=italic]
+
+\defineitemgroup[question][stopper=,left=(,right=)]
+\setupitemgroup[question][1][a]
+
+\defineitemgroup[enumerate]
+\setupitemgroup[enumerate][1][n]
+
+
+
+%%%%%%%%%%%%% Fonts %%%%%%%%%%%%%
+
+\definefontfeature[default][mode=node,liga=yes,kern=yes,tlig=yes,trep=yes,tquo=yes]
+\definefontfeature[bbnum][bbnum=yes]
+% \definefontfeature[stixtwo:mathextra][ss08=yes]
+\setupbodyfont[10pt,modern]
+
+  
+%%%%%%%%%%%% Composing %%%%%%%%%%%%%
+
+\setupenumeration[headcommand=\groupedcommand{}{.},alternative=serried,indenting=yes,width=fit,way=bychapter]
+
+\setupindenting[medium,yes]
+
+\setupinteraction[state=start,style=,color=,contrastcolor=,focus=standard]
+
+%\setuppagenumbering[location={footer,left},style=\italic]
+
+\setupheader[text][before={\startframed[frame=off,bottomframe=on]},after={\stopframed}]
+
+\setupheadertexts[\getmarking[chapternumber]\,{\getmarking[chapter]}][{\getmarking[sectionnumber]}\,{\getmarking[section]}]
+
+\setupfootertexts[6LZT]
+\setuppagenumbering[location={footer,right},alternative=doublesided]
+
+%%%%%%%%%%%%% Math %%%%%%%%%%%%%
+
+\setupmathematics[ucgreek=italic,italics=yes,differentiald=upright]
+\definemathfence[set][brace][define=yes,middle=|]
+\definemathfence[defset][brace][define=yes,middle=:]
+\definemathfence[comma][parenthesis][define=yes,middle=\downarrow]
+
+\definemathfunction[interior][right=\interiorsymbol]
+\definemathfunction[dim]
+\definemathfunction[supp]
+\definemathfunction[range]
+\definemathfunction[Hom]
+\definemathfunction[Bimod]
+\definemathfunction[Sing]
+\definemathfunction[Fun]
+\definemathfunction[N]
+\definemathfunction[Im]
+\definemathfunction[id]
+\definemathfunction[Const]
+\definemathfunction[colim][mathlimits=yes]
+\setupmathlabeltext[ker=Ker]  \definemathfunction[ker]
+\setupmathlabeltext[coker=CoKer]  \definemathfunction[coker]
+\setupmathlabeltext[ext=Ext]  \definemathfunction[ext]
+\definemathfunction[Set][style=\mathbf]
+\definemathfunction[sSet][style=\mathbf]
+\definemathfunction[Ab][style=\mathbf]
+\definemathfunction[Grp][style=\mathbf]
+\definemathfunction[Ring][style=\mathbf]
+\definemathfunction[Vect][style=\mathbf]
+\definemathfunction[Top][style=\mathbf]
+
+\definemathsymbol[rto][relation]["2192]
+\definemathsymbol[lto][relation]["2190]
+\definemathsymbol[longrto][relation]["27F6]
+\definemathsymbol[longlto][relation]["27F5]
+\definemathsymbol[Rto][relation]["21D2]
+\definemathsymbol[Lto][relation]["21D0]
+\definemathsymbol[longRto][relation]["27F9]
+\definemathsymbol[longLto][relation]["27F8]
+\definemathsymbol[lrto][relation]["2194]
+\definemathsymbol[Lrto][relation]["21D4]
+\definemathsymbol[longlrto][relation]["27F7]
+\definemathsymbol[longLrto][relation]["27FA]
+\definemathsymbol[freeproduct][binary]["2217] 
+\definemathsymbol[plus][binary]["002B]
+\definemathsymbol[interiorsymbol][prime]["2218]
+\definemathsymbol[Pi][operator]["220F]

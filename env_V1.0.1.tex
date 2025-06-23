@@ -1,0 +1,68 @@
+%%%%%%%%%%%%% Structure %%%%%%%%%%%%%
+\setuphead[title][header=high,align=middle,textstyle=\italic\bfd]
+
+\setuppagenumbering[location={header,right}]
+  
+\defineenumeration[structure][title=yes,prefix=chapter] 
+\defineenumeration[definition][structure][text=Definition]
+\defineenumeration[proposition][structure][text=Proposition]
+\defineenumeration[theorem][structure][text=Theorem]
+\defineenumeration[lemma][structure][text=Lemma]
+\defineenumeration[exercise][structure][text=Exercise]
+\defineenumeration[problem][structure][text=Problem]
+\defineenumeration[corollary][structure][text=corollary]
+
+\defineenumeration[proof][number=no,text=Proof,closesymbol=\mathqed,headstyle=italic]
+\defineenumeration[solution][title=yes,number=no,text=Solution,headstyle=italic]
+
+\defineitemgroup[enumerate][stopper=,left=(,right=)]
+\setupitemgroup[enumerate][1][n]
+
+\startluacode
+  fonts.handlers.otf.addfeature {
+    name = "bbnum",
+    type = "substitution",
+    data = {
+      [0x30] = 0x1D7D8,
+      [0x31] = 0x1D7D9,
+      [0x32] = 0x1D7DA,
+      [0x33] = 0x1D7DB,
+      [0x34] = 0x1D7DC,
+      [0x35] = 0x1D7DD,
+      [0x36] = 0x1D7DE,
+      [0x37] = 0x1D7DF,
+      [0x38] = 0x1D7E0,
+      [0x39] = 0x1D7E1,
+    }
+  }
+\stopluacode
+
+\setuphead[chapter][page=no,align=center,textstyle=ss,numberstyle=\tfd\addff{bbnum}]
+
+\setuphead[section][page=no,align=flushleft,style=bfb,before=\blank[2*big]\startframed[background=color,backgroundcolor=darkgray,foreground=color,foregroundcolor=white,frame=off],after=\stopframed\blank]
+
+\setuphead[subsection][page=no,number=no,align=flushleft,style=\tfa,before=\blank[2*big]\startframed[background=color,backgroundcolor=gray,frame=off],after=\stopframed\blank]
+
+%%%%%%%%%%%%% Fonts %%%%%%%%%%%%%
+\definefontfeature[default][mode=node,liga=yes,kern=yes,tlig=yes,trep=yes,tquo=yes]
+\definefontfeature[bbnum][bbnum=yes]
+% \definefontfeature[stixtwo:mathextra][ss08=yes]
+\setupbodyfont[10pt,dejavu]
+  
+%%%%%%%%%%%% Composing %%%%%%%%%%%%%
+
+\setupenumeration[headcommand=\groupedcommand{}{.},alternative=serried,indenting=yes,width=fit]
+
+\setupindenting[medium,yes]
+
+\setupinteraction[state=start,style=,color=,contrastcolor=,focus=standard]
+
+%%%%%%%%%%%%% Math %%%%%%%%%%%%%
+
+\setupmathematics[ucgreek=italic,italics=yes,differentiald=upright]
+% \definemathcases[cases][simplecommand=cases]
+\definemathfence[set][brace][define=yes,middle=`:]
+\definemathfunction[interior][right=\interiorsymbol]
+\definemathfunction[dim]
+\definemathfunction[Hom]
+\definemathsymbol[interiorsymbol][prime]["2218]
